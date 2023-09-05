@@ -1,0 +1,80 @@
+<!--pages/goods/goodsDetail.wxml-->
+<wxs module="fn">
+  module.exports = {
+    toFloat: function (str) {
+      var data = parseFloat(str);
+      return data;
+    }
+  }
+</wxs>
+
+
+<view style="padding-bottom: {{bottomHeight+50}}px;">
+
+<van-icon bind:tap="backRouter" style="position: fixed;color: white;z-index: 100;left: 10px;top: {{statusHeight-34}}px;background-color: rgba(0, 0, 0, 0.397);border-radius: 30px;" name="arrow-left" size="30px"></van-icon>
+
+<swiper style="height: 250px;" autoplay="true" indicator-dots="true">
+  <swiper-item wx:for="{{goodsBanner}}" wx:key="index">
+    <image style="width: 100%;height: 100%;" src="{{item}}"></image>
+  </swiper-item>
+</swiper>
+<view style="background-color: white;padding-top: 10px;">
+  <text style="color: tomato;margin-left: 5px;">¥{{(goodData.goodsPrice)}}</text>
+  <text style="color: gray;padding-left: 5px;text-decoration: line-through;">¥{{fn.toFloat(goodData.originalPrice)}}</text>
+</view>
+
+<view style="margin-top: 0;margin-left: 5px;margin-right: 5px;">
+  {{goodData.goodsName}}
+</view>
+
+<view style="padding-left: 5px;padding-right: 5px;padding-bottom: 10px;">
+  <view style="width: 50%;display: inline-block;color: #999999;">
+    兑换量：{{goodData.saleCount}}
+  </view>
+  <view style="width: 50%;display: inline-block;color: #999999;text-align: right;">
+    浏览量：{{goodData.pageView}}
+  </view>
+</view>
+<view class="lines" />
+<view style="height: 40px;padding-left: 10px;line-height: 40px;color: #999999;">
+  该商品不发货偏远地区
+</view>
+<view class="lines" />
+<view style="height: 40px;padding-left: 10px;line-height: 40px;color: #999999;display: flex;">
+  <text>规格 </text>
+  <text style="color: #333333;flex: 1;margin-left: 10px;">{{goodData.spec}}</text>
+  <van-icon name="arrow" />
+</view>
+<view class="lines" />
+
+<view style="height: 40px;padding-left: 10px;line-height: 40px;color: #999999;display: flex;">
+  <text>用户好评 </text>
+  <text style="color: rgb(255, 119, 29);font-size: 14px;margin-left: 8px;">好评率{{goodData.goodsCommentRating}}%</text>
+  <text style="color: #333333;flex: 1;margin-left: 10px;text-align: right;font-size: 13px;">查看全部</text>
+  <van-icon name="arrow" />
+</view>
+<view class="lines" style="height: 1px;"/>
+<view style="height:80px;line-height: 80px;text-align: center;">
+暂无评论
+</view>
+<view class="lines" />
+
+<view style="text-align: center;height: 40px;width: 100%;background-color: white;line-height: 40px;">
+  商品详情
+</view>
+
+<rich-text class="content" nodes="{{goodContent}}" />
+
+</view>
+
+<view style="height: {{bottomHeight+50}}px;width: 100%;background-color: white;position: fixed;bottom: 0;display: flex;">
+ 
+ <view style="display: inline-block;width: 60px;text-align: center;padding-top: 5px;">
+ <van-icon style="display: block;" name="service" size="20px" />
+ <view style="font-size: 13px;">客服</view>
+ </view>
+
+  <view style="flex: 1; display: inline-block;margin-right: 5px;margin-top: 5px;height: 40px;background-color: rgb(252, 151, 68);border-radius: 40px;line-height: 40px;text-align: center;color: white;">
+  立即购买
+  </view>
+</view>

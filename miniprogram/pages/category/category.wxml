@@ -1,0 +1,40 @@
+<!--pages/category/category.wxml-->
+<wxs src="../../utils/tool.wxs" module="tools"></wxs>
+<view class="content">
+
+  <view style="height: {{statusHeight}}px;background-color: white;">
+    <view style="padding-left: 8px;padding-top: {{statusHeight-44}}px;line-height: 44px;font-size: 21px;">分类</view>
+  </view>
+
+<view style="padding-top: 5px;vertical-align: top;">
+  <view style="width: 25%;display: inline-block;">
+    <scroll-view style="height: {{contentHeight-20}}px;border-radius: 10px;" scroll-y>
+      <block wx:for="{{categoryList}}" wx:key="idx">
+        <view bind:tap="leftMenuTap" data-tap="{{index}}" class="{{(index==currentIndex)?'active':'unactive' }}"  style="height: 50px;border-bottom:solid 1px #ebedf0;width: 100%;text-align: center;line-height: 50px;display: block;font-size: 15px;">
+        {{item.cname}} 
+        </view>
+    </block>
+    </scroll-view>
+  </view>
+
+  <view style="width: 75%;display: inline-block;vertical-align: top;">
+    <scroll-view style="height: {{contentHeight-20}}px;border-radius: 10px;" scroll-y>
+      <block wx:for="{{goodsList}}" wx:key="index">
+        <view style="height: 100px;width: 100%;background-color: white;margin-top: 5px;margin-left: 5px;display: flex;">
+            <image style="height: 80px;width: 80px;padding-top: 10px;" mode="heightFix" src="{{item.goodsImg}}" />
+            <view style="display: inline-block;vertical-align: top;flex: 1;padding-left: 8px;padding-right: 5px;">
+                <view style="font-size: 14px;width: 100%;height: 60px;overflow:hidden; text-overflow: ellipsis; ;margin-top: 8px;">{{item.goodsName}}</view>
+                
+                <view style="display: flex;">
+                  <text style="color: tomato;display: inline-block;font-size: 14px;margin-top: 5px;line-height: 20px;height: 20px;flex: 1;">¥{{tools.toFloat(item.goodsPrice)}}</text>
+                  <van-icon data-info="{{item}}" bind:tap="tapShopcart" style="display: inline-block;margin-right: 8px;" name="cart-o" color="tomato" size="25px" />
+                </view>
+            </view>
+        </view>
+    </block>
+    </scroll-view>
+  </view>
+</view>
+</view>
+
+<van-icon animation='{{ani}}'  style="display: inline-block;margin-right: 8px;position: fixed;z-index: 9999;" name="cart-o" color="tomato" size="25px" />

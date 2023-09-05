@@ -1,0 +1,79 @@
+<!--pages/basket/basket.wxml-->
+<wxs src="../../utils/tool.wxs" module="tools"></wxs>
+<view style="height: {{statusHeight}}px;background-color: white;position: fixed;z-index: 999;width: 100%;display: flex;">
+  <view style="padding-left: 8px;padding-top: {{statusHeight-44}}px;line-height: 44px;font-size: 21px;">购物车</view>
+
+  <view bind:tap="editAction" style="margin-top: {{statusHeight-35}}px;left: {{editRight-40}}px;position: absolute;">
+    {{editFlag?'完成':'编辑'}}
+  </view>
+</view>
+
+
+<view class="container" style="padding-top: {{statusHeight}}px;">
+  <scroll-view style="padding-bottom: 50px;">
+    <view wx:for="{{goodsList}}" wx:key="index">
+      <view style="margin-top: 5px;background-color: white;padding-top: 8px;padding-bottom: 8px;padding-left: 5px;">
+        <van-row>
+          <van-col>
+            <view style="display: flex;padding-right: 5px;">
+              <view bind:tap="selectGoods" data-index="{{index}}" style="display: flex;">
+                <van-icon class="{{(item.selectFlag==true)?'select':'11'}}" name="{{(item.selectFlag==true)?'success':'circle'}}" />
+              </view>
+              <image style="width: 80px;height: 80px;padding-left: 5px;border-radius: 10px;" src="{{item.goodsImg}}" />
+            </view>
+          </van-col>
+
+          <van-col>
+            <view style="width: 500rpx;display: inline-block;padding-top: 0;height: 40px;font-size: 13px;max-lines: 2;overflow: hidden;">
+              {{item.goodsName}}
+            </view>
+            <van-row style="padding-left: 12px;">
+              <view style="display: flex;justify-content: space-between;">
+                <view>
+                  <view style="color: gray;font-size: 11px;max-width: 300rpx;">
+                    {{item.spec}}
+                  </view>
+                  <view style="color: rgb(255, 42, 26);font-size: 14px;">
+                    ¥{{tools.toFloat(item.goodsPrice)}}
+                  </view>
+                </view>
+                <van-stepper value="{{ item.count }}" data-index="{{index}}" bind:change="countOnChange" />
+              </view>
+
+            </van-row>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view style="width: 100%;height: 40px;background-color: white;position: fixed;z-index: 999;width: 100%;bottom: 0px;">
+  <view bind:tap="selectAllAction" style="display: flex;float: left;align-items: center;height: 40px;">
+    <van-icon style="border-radius: 15px;width: 15px;height: 15px;margin-left: 5px;margin-right: 5px;" class="{{(selectAllFlag==true)?'select':'11'}}" name="{{(selectAllFlag==true)?'success':'circle'}}"></van-icon>
+    <view style="color: #333333;font-size: 14px;">全选</view>
+  </view>
+  <view wx:if="{{!editFlag}}">
+    <view style="display: flex;float: left;align-items: center;height: 40px;">
+      <view style="margin-left: 5px;color: #666666;font-size: 13px;">合计:</view>
+      <view style="margin-left: 5px;color: black;font-size: 14px;">¥</view>
+      <view style="margin-left: 5px;color: black;font-size: 15px;font-weight: bold;">{{allPrice}}</view>
+    </view>
+    <view style="float: right;height: 40px;">
+      <view style="height: 30px;background-color: rgb(252, 55, 55);padding-left: 20px;padding-right: 20px;color: white;border-radius: 30px;line-height: 30px;margin-top: 5px;margin-right: 8px;font-size: 13px;">
+        去结算({{allCount}})
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{editFlag}}">
+    <view style="float: right;height: 40px;">
+      <view bind:tap="deleteGoodsAction" style="height: 25px;text-align: center;line-height: 25px;border-radius: 30px;border:1px solid #666666;width: 60px;margin-right: 8px;margin-top: 8px;font-size: 14px;">删除</view>
+    </view>
+
+  </view>
+</view>
+
+<view style="position: fixed;top:200px;width:100%;text-align: center;color: #999999;" wx:if="{{goodsList.length==0}}">
+  你还没添加任何商品
+</view>

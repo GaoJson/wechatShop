@@ -1,0 +1,112 @@
+<!--index.wxml-->
+
+<wxs src="../../utils/tool.wxs" module="tools"></wxs>
+
+<view style="background-color: rgb(238, 238, 238);">
+  <view style="height:{{statusHeight+40}}px;background: linear-gradient(90deg,#ff9603, #ffab62);width: 100%;position: fixed;z-index: 999;top: 0;">
+    <view style="padding-left: 10px;color: white;padding-top: {{statusHeight-44}}px;height: 44px;line-height: 44px;font-size: 20px;font-weight: bold;">
+      淘宝
+    </view>
+
+    <view style="padding-top: 6px;padding-bottom: 5px;margin-left: 30px;margin-right: 30px;background-color: white;border-radius: 40px;padding-left: 15px;height: 20px;">
+      <icon style="padding-top: 0px;padding-right: 8px;color: rgb(199, 199, 199);" type="search" size="15px"></icon>
+      <text style="color: rgb(199, 199, 199);">搜索商品</text>
+    </view>
+
+  </view>
+
+
+  <scroll-view style="height: {{contentHeight}}px;margin-top:{{statusHeight+40}}px;" scroll-y refresher-triggered="{{refreshStatus}}" bindrefresherrefresh="getGoodsData" refresher-enabled="true" bindscrolltolower="getMoreData">
+
+    <swiper autoplay="true" indicator-dots="true">
+      <block wx:for='{{topBannerVos}}' wx:key='imgUrl'>
+        <swiper-item class="banner-item">
+          <view class='img-box'>
+            <image src='{{item.coverImg}}' data-prodid='{{item.relation}}' bindtap='toProdPage' class='banner'></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <swiper indicator-dots="true" indicator-active-color="orange" style="height: 200px;background-color: white;">
+      <swiper-item wx:for="{{tgoodsCategoryVos}}" wx:key="index">
+        <van-row>
+          <block wx:for="{{tgoodsCategoryVos[index]}}" wx:key="imgUrl">
+            <van-col style="text-align:center;" span="6">
+              <image style="width: 50px;height: 50px;display: block;margin-left: auto;margin-right: auto;padding-top: 15px;" src="{{item.imgUrl}}"></image>
+              <text style="display: block;padding-top: 5px;">{{item.cname}}</text>
+            </van-col>
+          </block>
+        </van-row>
+      </swiper-item>
+    </swiper>
+
+    <view style="background-color: white;height: 40px;">
+      <van-row>
+        <van-col style="text-align: center;" span="3">
+          <van-icon style="margin-top: 10px;" name="volume-o" size="20px" />
+        </van-col>
+        <van-col span="18">
+          <swiper autoplay="true" style="height: 40px;" vertical="true">
+            <swiper-item wx:for="{{shopNoticeVos}}" wx:key="noticeTitle">
+              <text style="line-height: 40px;">{{item.noticeTitle}}</text>
+            </swiper-item>
+
+          </swiper>
+        </van-col>
+        <van-col style="text-align: center;" span="3">
+          <van-icon style="margin-top: 10px;" name="arrow" size="20px" />
+        </van-col>
+      </van-row>
+    </view>
+    <van-row>
+      <van-col span="12">
+        <view style="height: 250px;margin-top: 10px;padding-left: 10px;">
+          <swiper style="height: 100%;" autoplay="true">
+            <swiper-item wx:for="{{midBannerVos}}" wx:key="coverImg">
+              <image style="height:100%;width: 100%;border-radius: 10px;" src="{{item.coverImg}}" mode="aspectFill" />
+            </swiper-item>
+          </swiper>
+        </view>
+
+      </van-col>
+    </van-row>
+
+    <view style="padding-top: 10px;padding-bottom: 10px;font-size: 25px;">精选商品</view>
+    <van-row>
+      <van-col span="12" style="height: 320px;background-color: white;" wx:for="{{goodsList}}" wx:key="index">
+        <view bind:tap="jumpGoodsDetail" data-info="{{item.id}}" style="padding: 5px 8px 5px 8px;">
+          <view style="background-color: white;border-radius: 10px;">
+            <image style="width: 100%;height: 200px;border-top-right-radius: 10px;border-top-left-radius: 10px;" src="{{item.goodsImg}}" />
+            <text style="font-size: 12px;overflow: hidden; text-overflow:unset;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;"> {{ item.goodsName }}</text>
+
+            <view style="display: flex;">
+              <text style="color: #fa732b;padding-left: 7px;font-size: 14px;flex: 1;">¥{{tools.toFloat(item.goodsPrice)}}</text>
+              <text style="color: gray;font-size: 10px;padding-right: 5px;text-align: right;">{{ item.saleCount }}人已付款</text>
+            </view>
+            <van-row>
+              <view style="justify-content: space-between;display: flex;">
+                <view>
+                  <view style="margin-top: 5px;margin-bottom: 10px;;display: inline-block;padding: 3px 8px 3px 8px;background-color: #000;color:white;font-size: 12px;font-weight: 400;">贡献值</view>
+                  <view style="display: inline-block;padding: 3px 8px 3px 8px;background: linear-gradient(#F5CB81, #FBE8B9); color: #000;font-size: 12px;font-weight: 400;">{{tools.toFloat(item.contributeValue)}}</view>
+                </view>
+                <view data-info="{{item}}" catch:tap="tapShopcart">
+                  <van-icon  style="display: inline-block;margin-right: 8px;" name="cart-o" color="tomato" size="25px" />
+                </view>
+                
+              </view>
+
+            </van-row>
+
+
+          </view>
+        </view>
+
+      </van-col>
+    </van-row>
+
+  </scroll-view>
+
+</view>
+
+<van-icon animation='{{ani}}'  style="display: inline-block;margin-right: 8px;position: fixed;z-index: 9999;" name="cart-o" color="tomato" size="25px" />
