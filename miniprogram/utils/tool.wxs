@@ -2,8 +2,11 @@
 function toFloat(str) {
   return parseFloat(str)
 }
+function toFloat(str) {
+  
+  return parseFloat(str)
+}
 
 module.exports = {
   toFloat:toFloat
-
 }

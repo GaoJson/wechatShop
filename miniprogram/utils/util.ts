@@ -19,6 +19,11 @@ const formatNumber = (n: number) => {
 }
 
 const app = getApp<IAppOption>();
+
+export const navbarHeight = ()=>{
+  return app.globalData.statusHeight! + 44
+}
+
 export const addShopCar = (data: any) => {
   var goodsList: any = app.globalData.shopCar;
   var exitFlag = false;

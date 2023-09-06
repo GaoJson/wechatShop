@@ -1,0 +1,35 @@
+<!--pages/my/address/address.wxml-->
+<navbar title="地址管理">
+</navbar>
+
+<view class="container">
+
+  <scroll-view style="padding-top: {{statusHeight+5}}px;padding-bottom: {{bottomHeight+50}}px;border-radius: 10px;background-color: #fafafa;">
+    <view wx:for="{{addressList}}" wx:key="index" style="margin-top: 1px;height: 80px;background-color: white;margin-left: 12px;margin-right: 12px;">
+      <view style="display: flex;justify-content: space-between;align-items: center;height: 100%;">
+        <view style="margin-left: 8px;">
+         <view style="font-size: 12px;color: #999999;">
+          {{item.area}}
+         </view>
+         <view style="font-size: 16px;color: #333333;margin-top: 3px;margin-bottom: 3px;">
+          {{item.areaDetail}}
+         </view>
+         <view style="font-size: 13px;color: #666666;">
+          {{item.userName}}   {{item.phone}}
+         </view>
+        </view>
+        <view bind:tap="editAddress" data-index="{{index}}" style="margin-right: 10px;">
+          <van-icon name="edit" size="20px"></van-icon>
+        </view>
+
+      </view>
+    </view>
+
+  </scroll-view>
+</view>
+
+<view class="add-btn" style="height: {{bottomHeight+40}}px;background-color: white;">
+  <view bind:tap="addAddress" style="background-color: tomato;color: white;text-align: center;height: 35px;margin-left: 20px;margin-right: 20px;line-height: 35px;border-radius: 35px;">
+    新建收货地址
+  </view>
+</view>

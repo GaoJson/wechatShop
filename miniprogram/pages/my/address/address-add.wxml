@@ -1,0 +1,73 @@
+<!--pages/my/address/address-add.wxml-->
+<navbar title="添加收货人">
+</navbar>
+
+<view class="container" style="padding-top: {{statusHeight}}px;">
+  
+  <view class="content">
+    <view class="input-view">
+      <view class="input-title">
+      收货人
+      </view>
+      <input value="{{userValue}}" bindinput="bindUserValue" type="text" class="input-input" placeholder="请填写收货人姓名" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-view">
+      <view class="input-title">
+      手机号码
+      </view>
+      <input value="{{phoneValue}}" bindinput="bindPhoneValue" type="number" class="input-input" placeholder="请填写收货人手机号码" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-view">
+      <view class="input-title">
+      所在地区
+      </view>
+      <view class="{{areaSelectFlag?'area-select':'area-unselect'}}" bind:tap="showArea" style="font-size: 13px;width: 500rpx;">
+      {{areaSelectFlag?areaData:"省市区县等"}}
+      </view>
+    </view>
+    <view class="input-view">
+      <view class="input-title">
+      详细地址
+      </view>
+      <input value="{{detailValue}}" bindinput="bindDetailValue" type="text" class="input-input" placeholder="街道,楼牌号等" placeholder-class="placeholder-style" />
+    </view>
+    <view class="input-view" style="height: 60px;">
+     <view style="display: flex;justify-content: space-between;margin-left: 10px;align-items: center;width: 100%;">
+      <view>
+        <view style="font-size: 13px;margin-bottom: 5px;">
+        设置默认地址
+        </view>
+        <view style="font-size: 11px;color: #999999;">
+        提示：下单会优先使用该地址
+        </view>
+      </view>
+      <view>
+        <switch bindchange="bindSwitch" checked="{{defaultAddress}}"></switch>
+      </view>
+     </view>
+    </view>
+
+    <view wx:if="{{editFlag}}" class="input-view">
+     <view bind:tap="deleteAddress" style="background-color: tomato;color: white;height: 30px;line-height: 30px;border-radius: 30px;padding-left: 10px;padding-right: 10px;font-size: 13px;">删除该地址</view>
+    </view>
+  </view>
+
+</view>
+
+
+
+
+<view class="add-btn" style="height: {{bottomHeight+40}}px;background-color: white;">
+  <view bind:tap="addAddress" style="background-color: tomato;color: white;text-align: center;height: 35px;margin-left: 20px;margin-right: 20px;line-height: 35px;border-radius: 35px;">
+    保存收货地址
+  </view>
+</view>
+
+<view wx:if="{{showAreaFlag}}" style="width: 100%;height: 100vh;background-color: #00000021;position: fixed;top: 0;">
+ <view style="bottom: 0;position: absolute;width: 100%;">
+  <van-area bind:confirm="ensureArea" bind:cancel="hideArea" style="bottom: 0;" area-list="{{ areaList }}" value="110101" />
+ </view>
+</view>
+<van-toast id="van-toast" />

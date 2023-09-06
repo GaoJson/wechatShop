@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "../../../template/navbar/navbar",
+    "van-area": "@vant/weapp/area",
+    "van-toast": "@vant/weapp/toast"
+  }
+}

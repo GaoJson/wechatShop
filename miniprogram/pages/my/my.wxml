@@ -50,7 +50,7 @@
       <van-icon name="arrow"/>
     </view>
   </view>
-  <view class="menu-list">
+  <view bind:tap="addressAction" class="menu-list">
     <view class="menu-title">
       <van-icon size='20px' name="location" />
       <view>我的地址</view>

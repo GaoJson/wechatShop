@@ -7,3 +7,10 @@ export interface GoodsModel {
   spec:string,
   selectFlag:boolean
 }
+export interface AddressModel {
+  userName:string,
+  phone:string,
+  area:string,
+  areaDetail:string,
+  defaultFlag:boolean
+}

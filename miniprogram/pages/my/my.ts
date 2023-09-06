@@ -68,6 +68,11 @@ Page({
 
   onChooseAvatar(e: any) {
     console.log(e);
-  }
+  },
+
+  addressAction(){
+    wx.navigateTo({url: '/pages/my/address/address'})
+
+  },
 
 })

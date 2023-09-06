@@ -5,7 +5,9 @@
     "pages/my/my",
     "pages/goods/goodsDetail",
     "pages/basket/basket",
-    "pages/category/category"
+    "pages/category/category",
+    "pages/my/address/address",
+    "pages/my/address/address-add"
   ],
   "tabBar": {
     "selectedColor": "#3a86b9",
@@ -40,7 +42,7 @@
     ]
   },
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationStyle": "custom"
   },
   "sitemapLocation": "sitemap.json"
