@@ -1,4 +1,5 @@
 import  API_HOME  from '../../api/homeApi';
+import { GoodsModel } from '../../utils/models';
 import { addCollectGoods, addShopCar, deleteCollectGoods } from '../../utils/util';
 const app = getApp<IAppOption>()
 // pages/goods/goodsDetail.ts
@@ -92,5 +93,24 @@ Page({
       duration: 2000
     })
   },
+  gotoOrder(){
+    var data:any = this.data.goodData;
+    var param:any = {
+      "goodsName": data.goodsName,
+      "goodsImg": data.goodsImg,
+      "goodsPrice": data.goodsPrice,
+      "id": data.id,
+      "spec": data.spec,
+      "count":1
+    };
+    var tempList:GoodsModel[]=[];
+    tempList.push(param)
+    wx.navigateTo({
+      url: '/pages/goods/goodsorder/goods-order',
+      success:function(res){
+        res.eventChannel.emit('addressList',tempList)
+      }
+    })
 
+  },
 })

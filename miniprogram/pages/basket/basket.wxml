@@ -60,7 +60,7 @@
       <view style="margin-left: 5px;color: black;font-size: 15px;font-weight: bold;">{{allPrice}}</view>
     </view>
     <view style="float: right;height: 40px;">
-      <view style="height: 30px;background-color: rgb(252, 55, 55);padding-left: 20px;padding-right: 20px;color: white;border-radius: 30px;line-height: 30px;margin-top: 5px;margin-right: 8px;font-size: 13px;">
+      <view bind:tap="gotoOrder" style="height: 30px;background-color: rgb(252, 55, 55);padding-left: 20px;padding-right: 20px;color: white;border-radius: 30px;line-height: 30px;margin-top: 5px;margin-right: 8px;font-size: 13px;">
         去结算({{allCount}})
       </view>
     </view>

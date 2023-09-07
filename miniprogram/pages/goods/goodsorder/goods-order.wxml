@@ -1,0 +1,96 @@
+<!--pages/goods/goodsorder/goods-order.wxml-->
+<wxs src="../../../utils/tool.wxs" module="tools"></wxs>
+<navbar title="确认订单" />
+
+<view class="container">
+
+  <scroll-view style="padding-top: {{statusHeight+10}}px;padding-bottom: {{bottomHeight+50}}px;">
+
+    <view bind:tap="gotoAddress" class="address">
+      <view wx:if="{{address.areaDetail}}" class="address-view">
+        <view>
+          <view class="area">
+            <view wx:if="{{address.defaultFlag}}">默认</view> {{address.area}}
+          </view>
+          <view class="area-detail">
+            {{address.areaDetail}}
+          </view>
+          <view class="user">
+            {{address.userName}} {{address.phone}}
+          </view>
+        </view>
+
+      </view>
+
+      <view class="no-data" wx:if="{{!address.areaDetail}}">
+        暂无地址，点击添加
+      </view>
+    </view>
+
+    <view class="goods">
+      <view class="goods-item" wx:for="{{goodsList}}" wx:key="index">
+        <image src="{{item.goodsImg}}"> </image>
+        <view class="goods-detail">
+          <view class="goods-name">
+            {{item.goodsName}}
+          </view>
+          <view class="goods-spec">
+            {{item.spec}}
+          </view>
+          <view class="goods-price-number">
+            <view class="goods-price">
+              ¥ {{tools.toFloat(item.goodsPrice)}}
+            </view>
+            <view class="goods-num">
+              x{{item.count}}
+            </view>
+          </view>
+          <view>
+            <view class="tips">
+              七天无理由退货
+            </view>
+            <view class="tips">
+              自营
+            </view>
+          </view>
+
+        </view>
+
+      </view>
+    </view>
+
+    <view class="price">
+      <view class="price-view" wx:for="{{priceInfo}}" wx:key="index">
+        <view class="title">
+          {{item.title}}
+        </view>
+        <view class="goods-price">
+          ¥{{item.value}}
+        </view>
+      </view>
+
+      <view class="lines"/>
+
+      <view class="all-price">
+      <view>
+      总计：</view>
+      ¥{{allPrice}}
+      </view>
+
+    </view>
+  </scroll-view>
+</view>
+
+<view class="pay-view" style="height: {{bottomHeight+40}}px;">
+  <view class="pay">
+    <view class="pay-price">
+      <text>¥</text>{{allPrice}}
+    </view>
+
+    <view class="pay-btn">
+      去付款
+    </view>
+  </view>
+
+
+</view>

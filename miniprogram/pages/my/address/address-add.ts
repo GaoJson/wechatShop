@@ -32,13 +32,12 @@ Page({
       if (this.options.index) {
         const index: number = Number.parseInt(this.options.index)
         this.data.editIndex = index;
+        this.data.editFlag = true;
         wx.getStorage({
           key: "address",
           success: (e) => {
             var addressList: AddressModel[] = e.data;
             var data: AddressModel = addressList[index];
-            console.log(data);
-            
             this.setData(
               {
                 editFlag:true,
@@ -143,7 +142,7 @@ Page({
           });
         }
         if(this.data.editFlag){
-          addressList.splice(this.data.editIndex,0,params)
+          addressList[this.data.editIndex] = params;
           Toast("修改成功")
         } else{
           addressList.push(params);

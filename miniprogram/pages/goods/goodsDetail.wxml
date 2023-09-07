@@ -66,7 +66,7 @@
  <van-icon bind:tap="addShopcat" style="margin-left: 13px;" name="shopping-cart-o" size='25px' />
  </view>
 
-  <view class="buy-btn">
+  <view bind:tap="gotoOrder" class="buy-btn">
   立即购买
   </view>
 </view>

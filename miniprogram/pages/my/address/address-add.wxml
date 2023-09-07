@@ -1,5 +1,5 @@
 <!--pages/my/address/address-add.wxml-->
-<navbar title="添加收货人">
+<navbar title="{{editFlag?'修改':'新增'}}收货人">
 </navbar>
 
 <view class="container" style="padding-top: {{statusHeight}}px;">

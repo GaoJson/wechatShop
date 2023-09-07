@@ -113,13 +113,10 @@ Page({
       var list = this.data.goodsList;
       var tempList:GoodsModel[]=[];
       tempList = tempList.concat(list)
-      
       const length = list.length;
       for (let index = 0; index < length; index++) {
         var element:GoodsModel = list[index];
-        
         if(element.selectFlag==true) {
-          console.log(element.goodsName);
           tempList.splice(tempList.indexOf(element),1)
         }
       }
@@ -128,8 +125,31 @@ Page({
         goodsList:tempList
       })
       calculateShopCar(this.data.goodsList as[])
-      
       this.calculatePrice()
+  },
+
+  gotoOrder(){
+    var list = this.data.goodsList;
+    var tempList:GoodsModel[]=[];
+    list.forEach(element => {
+      if(element.selectFlag){
+        tempList.push(element)
+      }
+    });
+    if(tempList.length == 0){
+      wx.showToast({
+        title:"暂无选择商品",
+        icon:'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/goods/goodsorder/goods-order',
+      success:function(res){
+        res.eventChannel.emit('addressList',tempList)
+      }
+    })
+
   }
 
 })
