@@ -1,0 +1,86 @@
+/* pages/my/collect/collect-page.wxss */
+
+.container {
+  height: 100vh;
+  width: 100%;
+  background-color: #f7f7f7;
+
+  scroll-view {
+    background-color: #f7f7f7;
+  }
+}
+
+.item-view {
+  width: 100%;
+  height: 200rpx;
+  background-color: white;
+  display: flex;
+
+  image {
+    margin-top: 25rpx;
+    margin-left: 20rpx;
+    height: 170rpx;
+    width: 170rpx;
+  }
+
+  .lines {
+    height: 1px;
+    width: 100%;
+    background-color: #eeeeee;
+  }
+
+  .content {
+    display: flex;
+    margin-left: 20rpx;
+    width: 550rpx;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title {
+      flex: 1;
+      margin-top: 18rpx;
+      font-size: 14px;
+    }
+
+    .prices {
+      margin-bottom: 20rpx;
+      display: flex;
+      justify-content: space-between;
+
+      .price {
+        color: rgb(255, 36, 36);
+      }
+
+      .menu {
+        margin-right: 15rpx;
+
+        .shopcar {
+          height: 20px;
+          width: 20px;
+          border-radius: 20px;
+          padding: 5px;
+          background-color: #eeeeee;
+        }
+
+        .delete {
+          margin-right: 10rpx;
+          height: 20px;
+          width: 20px;
+          border-radius: 20px;
+          padding: 5px;
+          background-color: #eeeeee;
+        }
+
+      }
+
+    }
+  }
+
+}
+
+.no-data{
+  color: #999999;
+  margin-top: 100px;
+  width: 100%;
+  text-align: center;
+}

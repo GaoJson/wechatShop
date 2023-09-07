@@ -20,14 +20,14 @@
   <view style="width: 75%;display: inline-block;vertical-align: top;">
     <scroll-view style="height: {{contentHeight-20}}px;border-radius: 10px;" scroll-y>
       <block wx:for="{{goodsList}}" wx:key="index">
-        <view style="height: 100px;width: 100%;background-color: white;margin-top: 5px;margin-left: 5px;display: flex;">
+        <view bind:tap="jumpGoodsDetail" data-info="{{item.id}}" style="height: 100px;width: 100%;background-color: white;margin-top: 5px;margin-left: 5px;display: flex;">
             <image style="height: 80px;width: 80px;padding-top: 10px;" mode="heightFix" src="{{item.goodsImg}}" />
             <view style="display: inline-block;vertical-align: top;flex: 1;padding-left: 8px;padding-right: 5px;">
                 <view style="font-size: 14px;width: 100%;height: 60px;overflow:hidden; text-overflow: ellipsis; ;margin-top: 8px;">{{item.goodsName}}</view>
                 
                 <view style="display: flex;">
                   <text style="color: tomato;display: inline-block;font-size: 14px;margin-top: 5px;line-height: 20px;height: 20px;flex: 1;">¥{{tools.toFloat(item.goodsPrice)}}</text>
-                  <van-icon data-info="{{item}}" bind:tap="tapShopcart" style="display: inline-block;margin-right: 8px;" name="cart-o" color="tomato" size="25px" />
+                  <van-icon data-info="{{item}}" catch:tap="tapShopcart" style="display: inline-block;margin-right: 8px;" name="cart-o" color="tomato" size="25px" />
                 </view>
             </view>
         </view>

@@ -7,7 +7,8 @@
     "pages/basket/basket",
     "pages/category/category",
     "pages/my/address/address",
-    "pages/my/address/address-add"
+    "pages/my/address/address-add",
+    "pages/my/collect/collect-page"
   ],
   "tabBar": {
     "selectedColor": "#3a86b9",

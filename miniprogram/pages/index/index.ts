@@ -97,8 +97,6 @@ Page({
     const id = e.currentTarget.dataset.info
     wx.navigateTo({url: '/pages/goods/goodsDetail?id='+id
     })
-
-
   },
   tapShopcart(e:any) {
     console.log("tapShopcarttapShopcarttapShopcart");

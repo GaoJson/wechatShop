@@ -51,6 +51,8 @@ export const addShopCar = (data: any) => {
   }
   wx.setStorageSync("shopCar", JSON.stringify(app.globalData.shopCar));
   wx.setStorageSync("shopCarCount", allCount);
+  console.log(allCount);
+
   wx.setTabBarBadge({
     index: 2,
     text: "" + allCount,
@@ -69,5 +71,49 @@ export const calculateShopCar = (data: []) => {
     index: 2,
     text: "" + allCount,
   })
+}
+
+export const addCollectGoods=(data:any)=>{
+  var param:any = {
+    "goodsName": data.goodsName,
+    "goodsImg": data.goodsImg,
+    "goodsPrice": data.goodsPrice,
+    "id": data.id,
+    "spec": data.spec,
+  };
+  wx.getStorage({
+    key:"collect",
+    success:(res:any)=>{
+      var list:any[] = res.data;
+      list.push(param);
+      wx.setStorageSync("collect",list)
+    },
+    fail:()=>{
+      wx.setStorageSync("collect",[param])
+    }
+  })
+
+}
+
+export const deleteCollectGoods=(data:any)=>{
+ 
+  wx.getStorage({
+    key:"collect",
+    success:(res:any)=>{
+      var list:any[] = res.data;
+      for (let index = 0; index < list.length; index++) {
+        const element = list[index];
+        if(element.id == data) {
+          list.splice(index,1)
+          break
+        }  
+      }
+      wx.setStorageSync("collect",list)
+    },
+    fail:()=>{
+      wx.setStorageSync("collect",[])
+    }
+  })
+
 }
 

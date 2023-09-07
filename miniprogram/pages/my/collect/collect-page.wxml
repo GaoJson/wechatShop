@@ -1,0 +1,32 @@
+<!--pages/my/collect/collect-page.wxml-->
+<navbar title="我的收藏">
+</navbar>
+<view class="container">
+  <scroll-view style="padding-top: {{statusHeight}}px;">
+    <view class="item-view" wx:for="{{collectList}}" wx:key="index">
+      <image src="{{item.goodsImg}}" />
+      <view class="content">
+        <view class="lines"></view>
+        <view class="title">
+          {{item.goodsName}}
+        </view>
+        <view class="prices">
+          <view class="price">
+            ¥{{item.goodsPrice}}
+          </view>
+          <view class="menu">
+            <van-icon catch:tap="deleteAction" data-index="{{index}}" class="delete" bind:tap="addShopcat" name="delete-o" size='18px' />
+            <van-icon catch:tap="shopcatAction" data-index="{{index}}" class="shopcar" bind:tap="addShopcat" name="shopping-cart-o" size='18px' />
+          </view>
+
+        </view>
+      </view>
+
+
+    </view>
+    <view class="no-data" wx:if="{{collectList.length==0}}">
+      暂无收藏
+    </view>
+  </scroll-view>
+
+</view>

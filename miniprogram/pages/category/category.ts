@@ -27,7 +27,6 @@ Page({
       page:1
     })
     
-    
     const model:any = this.data.categoryList[idx];
     this.getGoodsData(model.id)
   },
@@ -94,7 +93,15 @@ Page({
     setTimeout(()=>{
       addShopCar(data)
     },500)
-  }
-
+  },
+  jumpGoodsDetail(e:any){
+    const id = e.currentTarget.dataset.info
+    wx.navigateTo({url: '/pages/goods/goodsDetail?id='+id
+    })
+  },
+  onShow(){
+    console.log("1111");
+    
+  },
 
 })

@@ -41,7 +41,7 @@
 </view>
 
 <view style="margin-top: 8px;">
-  <view class="menu-list">
+  <view bind:tap="collectAction" class="menu-list">
     <view class="menu-title">
       <van-icon size='20px' name="shop-collect" />
       <view>我的收藏</view>

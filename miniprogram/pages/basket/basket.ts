@@ -45,8 +45,10 @@ Page({
     }
     this.setData({
       editFlag:false,
-      goodsList:array
+      goodsList:array,
+      selectAllFlag:false
     })
+    this.calculatePrice()
   },
 
   /**

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navbar": "../../../template/navbar/navbar",
+    "van-icon":"@vant/weapp/icon"
+  }
+}

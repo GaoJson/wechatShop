@@ -137,6 +137,11 @@ Page({
       key: "address",
       success: (e) => {
         var addressList: AddressModel[] = e.data;
+        if(params.defaultFlag == true){
+          addressList.forEach(element => {
+            element.defaultFlag = false;
+          });
+        }
         if(this.data.editFlag){
           addressList.splice(this.data.editIndex,0,params)
           Toast("修改成功")

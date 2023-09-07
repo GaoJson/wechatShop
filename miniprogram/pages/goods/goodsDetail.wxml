@@ -1,16 +1,8 @@
 <!--pages/goods/goodsDetail.wxml-->
-<wxs module="fn">
-  module.exports = {
-    toFloat: function (str) {
-      var data = parseFloat(str);
-      return data;
-    }
-  }
-</wxs>
 
+<wxs src="../../utils/tool.wxs" module="tools"></wxs>
 
 <view style="padding-bottom: {{bottomHeight+50}}px;">
-
 <van-icon bind:tap="backRouter" style="position: fixed;color: white;z-index: 100;left: 10px;top: {{statusHeight-34}}px;background-color: rgba(0, 0, 0, 0.397);border-radius: 30px;" name="arrow-left" size="30px"></van-icon>
 
 <swiper style="height: 250px;" autoplay="true" indicator-dots="true">
@@ -19,8 +11,8 @@
   </swiper-item>
 </swiper>
 <view style="background-color: white;padding-top: 10px;">
-  <text style="color: tomato;margin-left: 5px;">¥{{(goodData.goodsPrice)}}</text>
-  <text style="color: gray;padding-left: 5px;text-decoration: line-through;">¥{{fn.toFloat(goodData.originalPrice)}}</text>
+  <text style="color: tomato;margin-left: 5px;">¥{{(tools.toFloat(goodData.goodsPrice))}}</text>
+  <text style="color: gray;padding-left: 5px;text-decoration: line-through;">¥{{tools.toFloat(goodData.originalPrice)}}</text>
 </view>
 
 <view style="margin-top: 0;margin-left: 5px;margin-right: 5px;">
@@ -69,12 +61,12 @@
 
 <view style="height: {{bottomHeight+50}}px;width: 100%;background-color: white;position: fixed;bottom: 0;display: flex;">
  
- <view style="display: inline-block;width: 60px;text-align: center;padding-top: 5px;">
- <van-icon style="display: block;" name="service" size="20px" />
- <view style="font-size: 13px;">客服</view>
+ <view  style="display: flex;width: 80px;height: 40px;align-items: center;margin-left: 10px;">
+  <van-icon bind:tap="addCollect" color="{{collectFlag?'#ff1122':'#000000'}}"  name="{{collectFlag?'like':'like-o'}}" size='25px' />
+ <van-icon bind:tap="addShopcat" style="margin-left: 13px;" name="shopping-cart-o" size='25px' />
  </view>
 
-  <view style="flex: 1; display: inline-block;margin-right: 5px;margin-top: 5px;height: 40px;background-color: rgb(252, 151, 68);border-radius: 40px;line-height: 40px;text-align: center;color: white;">
+  <view class="buy-btn">
   立即购买
   </view>
 </view>

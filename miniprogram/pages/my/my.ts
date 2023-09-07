@@ -72,7 +72,9 @@ Page({
 
   addressAction(){
     wx.navigateTo({url: '/pages/my/address/address'})
-
+  },
+  collectAction(){
+    wx.navigateTo({url: '/pages/my/collect/collect-page'})
   },
 
 })
