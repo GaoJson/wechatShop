@@ -1,0 +1,19 @@
+<!--pages/my/order/order-page.wxml-->
+<navbar title="我的订单" />
+<view style="top: {{statusHeight}}px;" class="menu-list">
+    <view wx:for="{{menuList}}" wx:key="index" class="item">
+      <view bind:tap="menuSelectAction" data-index="{{index}}" class="title {{index==menuSelect?'active':''}}">
+        {{item}}
+        <view class="{{index==menuSelect?'line':''}}"></view>
+      </view>
+    </view>
+</view>
+
+<view style="padding-top: {{statusHeight+40}}px;padding-bottom: {{bottomHeight}};" class="container">
+  <scroll-view style="height: 100%;" scroll-y >
+  <view style="height: 50px;" wx:for="{{20}}" wx:key="index">
+  111
+  </view>
+  </scroll-view>
+
+</view>

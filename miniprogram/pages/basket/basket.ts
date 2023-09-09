@@ -23,7 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    wx.getWeRunData
+   
     
   },
 
@@ -39,10 +39,17 @@ Page({
    */
   onShow() {
     var array:[] = app.globalData.shopCar as []
+    var allCount = 0;
     for (let index = 0; index < array.length; index++) {
       const element:GoodsModel = array[index];
       element.selectFlag = false;
+      allCount += element.count;
     }
+    wx.setStorageSync("shopCarCount", allCount);
+    wx.setTabBarBadge({
+      index: 2,
+      text: "" + allCount,
+    })
     this.setData({
       editFlag:false,
       goodsList:array,
@@ -55,7 +62,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-    console.log("onHide");
+  
   },
 
   selectGoods(e:any){

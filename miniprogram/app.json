@@ -9,7 +9,8 @@
     "pages/my/address/address",
     "pages/my/address/address-add",
     "pages/my/collect/collect-page",
-    "pages/goods/goodsorder/goods-order"
+    "pages/goods/goodsorder/goods-order",
+    "pages/my/order/order-page"
   ],
   "tabBar": {
     "selectedColor": "#3a86b9",

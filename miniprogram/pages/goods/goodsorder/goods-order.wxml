@@ -87,10 +87,10 @@
       <text>¥</text>{{allPrice}}
     </view>
 
-    <view class="pay-btn">
+    <view bind:tap="gotoPayAction" class="pay-btn">
       去付款
     </view>
   </view>
-
-
 </view>
+
+<payment bind:ensurePwd="ensurePassword" bind:closeModel="closePayment" payShow="{{payShow}}"></payment>

@@ -96,7 +96,6 @@ export const addCollectGoods=(data:any)=>{
 }
 
 export const deleteCollectGoods=(data:any)=>{
- 
   wx.getStorage({
     key:"collect",
     success:(res:any)=>{
@@ -117,3 +116,35 @@ export const deleteCollectGoods=(data:any)=>{
 
 }
 
+export const getOrderList=():Promise<any>=>{
+  return new Promise((resolve)=>{
+    wx.getStorage({
+      key:"order",
+      success:(res:any)=>{
+        resolve(res.data)
+      },
+      fail:()=>{
+        wx.setStorageSync("order",[])
+        resolve([])
+      }
+    })
+  })
+}
+export const addOrder=(data:any):Promise<any>=>{
+  return new Promise((resolve)=>{
+    wx.getStorage({
+      key:"order",
+      success:(res:any)=>{
+        var list:any[] = res.data
+        if(list.length> 0){
+          var temp = list[list.length-1];
+           data.id = temp.id+1; 
+        }
+        list.push(data)
+        wx.setStorageSync("order",list)
+        resolve(data.id)
+      },
+    })
+  })
+  
+}

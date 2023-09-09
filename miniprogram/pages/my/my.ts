@@ -1,6 +1,6 @@
 // pages/my/my.ts
 Page({
-  
+
   /**
    * 页面的初始数据
    */
@@ -19,7 +19,7 @@ Page({
       icon: "toDelivery"
     },
     {
-      number: 1,
+      number: 0,
       name: "待收货",
       icon: "toTake"
     },
@@ -31,7 +31,47 @@ Page({
     ],
   },
 
-  
+  onShow() {
+    wx.getStorage({
+      key: "order",
+      success: (res) => {
+        console.log(res);
+        
+        var num0 = 0
+        var num1 = 0
+        var num2 = 0
+        var num3 = 0
+        var list: any[] = res.data;
+        list.forEach(element => {
+          switch (element.state) {
+            case 0:
+              num0 += 1
+              break;
+            case 1:
+              num1 += 1
+              break;
+            case 2:
+              num2 += 1
+              break;
+            case 3:
+              num3 += 1
+              break;
+          }
+        });
+        this.setData({
+          ['menuList[0].number']:num0,
+          ['menuList[1].number']:num1,
+          ['menuList[2].number']:num2,
+          ['menuList[3].number']:num3,
+        })
+
+      }
+    }
+    )
+
+
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -70,11 +110,15 @@ Page({
     console.log(e);
   },
 
-  addressAction(){
-    wx.navigateTo({url: '/pages/my/address/address'})
+  addressAction() {
+    wx.navigateTo({ url: '/pages/my/address/address' })
   },
-  collectAction(){
-    wx.navigateTo({url: '/pages/my/collect/collect-page'})
+  collectAction() {
+    wx.navigateTo({ url: '/pages/my/collect/collect-page' })
+  },
+
+  orderAction() {
+    wx.navigateTo({ url: '/pages/my/order/order-page' })
   },
 
 })

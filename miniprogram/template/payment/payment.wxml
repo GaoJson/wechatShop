@@ -1,0 +1,42 @@
+<!--template/payment/payment.wxml-->
+
+<van-popup show="{{ payShow }}" round position="bottom" bind:close="hide">
+    <view class="titles">
+    <view bind:tap="closeModel" class="close-btn">x</view>
+    <view class="title">
+      请输入支付密码
+    </view>
+  </view>
+
+  <view class="prices">
+    <view class="mark">
+    商品
+    </view>
+    <view class="price">
+      <text>¥</text>12.12
+    </view>
+  </view>
+
+
+  <view class="lines" />
+  <view class="password-view">
+    <view class="password">
+      <view class="item" wx:for="{{6}}" wx:key="index">
+        <view class="item-view" wx:if="{{pwd.length>index}}">
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="grid">
+    <block wx:for="{{numberList}}" wx:key="index">
+      <view class="grid-item">
+        <view bind:tap="clickNumber" data-item="{{item}}" hover-class="hover-btn" hover-stay-time='100' style="font-size: 20px;border: 1px solid #eeeeee;">
+          <view>
+            {{item}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</van-popup>
