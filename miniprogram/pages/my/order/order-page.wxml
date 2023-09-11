@@ -1,19 +1,76 @@
 <!--pages/my/order/order-page.wxml-->
+<wxs src="../../../utils/tool.wxs" module="tools"></wxs>
 <navbar title="我的订单" />
 <view style="top: {{statusHeight}}px;" class="menu-list">
-    <view wx:for="{{menuList}}" wx:key="index" class="item">
-      <view bind:tap="menuSelectAction" data-index="{{index}}" class="title {{index==menuSelect?'active':''}}">
-        {{item}}
-        <view class="{{index==menuSelect?'line':''}}"></view>
-      </view>
+  <view wx:for="{{menuList}}" wx:key="index" class="item">
+    <view bind:tap="menuSelectAction" data-index="{{index}}" class="title {{index==menuSelect?'active':''}}">
+      {{item}}
+      <view class="{{index==menuSelect?'line':''}}"></view>
     </view>
+  </view>
 </view>
 
-<view style="padding-top: {{statusHeight+40}}px;padding-bottom: {{bottomHeight}};" class="container">
-  <scroll-view style="height: 100%;" scroll-y >
-  <view style="height: 50px;" wx:for="{{20}}" wx:key="index">
-  111
-  </view>
+<view style="padding-top: {{statusHeight+40}}px;padding-bottom: {{bottomHeight}}px;" class="container">
+  <scroll-view scroll-y>
+    <view class="order-list" wx:for="{{orderList}}" wx:key="index">
+      <view class="order-top">
+        <view>自营</view>
+        <view class="state">{{tools.getState(item.state)}}</view>
+      </view>
+
+      <view class="order-goods">
+        <view>
+          <view style="display: flex;" wx:if="{{item.goodList.length>1}}">
+            <view style="margin-right: 5px;" wx:for="{{item.goodList}}" wx:key="index" wx:if="{{index < 4}}">
+              <image class="good-img" src="{{item.goodsImg}}" />
+            </view>
+          </view>
+          <view style="display: flex;padding-right: 10px;" wx:if="{{item.goodList.length==1}}">
+            <image style="background-color: #eeeeee;" class="good-img" src="{{item.goodList[0].goodsImg}}" />
+            <view style="font-size: 12px;padding-left: 10px;">
+              {{item.goodList[0].goodsName}}
+            </view>
+          </view>
+
+        </view>
+        <view class="price">
+          <view style="width: 130rpx;word-wrap: break-word;text-align: right;">
+            ¥{{item.price}}
+          </view>
+          <view style="color: gray;">
+            共1件
+          </view>
+        </view>
+      </view>
+
+      <view style="display:flex;justify-content: space-between">
+        <view bind:tap="moreAction" style="font-size: 13px;color: #666666;margin-left: 8px;line-height: 25px;">
+          更多
+        </view>
+        <view style="flex-wrap: wrap;" class="operate-menu">
+          <view wx:if="{{item.state==0}}" class="operate-item red">去支付</view>
+          <view class="operate-item gray">再次购买</view>
+          <view wx:if="{{item.state==1}}" class="operate-item gray">催发货</view>
+          <view wx:if="{{item.state==2}}" class="operate-item gray">查看物流</view>
+          <view wx:if="{{item.state==3}}" class="operate-item gray">删除订单</view>
+          <view wx:if="{{item.state==3}}" class="operate-item gray">评价</view>
+        </view>
+      </view>
+    </view>
   </scroll-view>
 
+</view>
+
+<view wx:if="{{showMore}}" ca capture-bind:touchend="hideMoreAction" style="position: fixed;height: 100%;width: 100%;top: 0;">
+  <view  class="more-view" style="bottom: {{moreTop}}px;">
+    <view catch:tap="itemAction" class="more-item">
+      查看发票
+    </view>
+    <view class="more-item">
+      评价晒单
+    </view>
+    <view class="more-item">
+      删除订单
+    </view>
+  </view>
 </view>

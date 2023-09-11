@@ -10,7 +10,14 @@ Page({
     statusHeight: getApp<IAppOption>().globalData.statusHeight! + 44,
     bottomHeight: getApp<IAppOption>().globalData.bottomHeight,
     menuSelect:0,
-    menuList:["全部","待支付","待发货","待收货","已完成"]
+    menuList:["全部","待支付","待发货","待收货","已完成"],
+    allOrder:[],
+    orderList:[],
+
+    moreTop:0,
+    moreLeft:0,
+    showMore:false
+
   },
 
   /**
@@ -18,9 +25,33 @@ Page({
    */
   onLoad() {
     getOrderList().then((data:any)=>{
-      console.log(data);
-      
+      this.data.allOrder = data;
     })
+    
+  },
+  onReady(){
+    this.getList(-1);
+  },
+
+  getList(index:number){
+    var list:any[] = []
+    this.data.allOrder.forEach(element => {
+       const data:any = element;
+       if(data.state == index) {
+          list.push(data)
+       }
+    });
+    list.reverse()
+    if(index == -1){
+      this.setData({
+        orderList:this.data.allOrder.reverse()
+      })
+    } else {
+      this.setData({
+        orderList:list as any
+      })
+    }   
+    console.log(this.data.orderList);
   },
 
   menuSelectAction(e:any){
@@ -30,6 +61,7 @@ Page({
         menuSelect:index
       })
     }
+    this.getList(index-1);
   },
 
 
@@ -38,9 +70,34 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    console.log("1111111");
+    
     
   },
 
+  itemAction(){
+    console.log("222222");
+    
+
+  },
+  
+
+  moreAction(e:any){
+    console.log("1111111");
+    this.setData({
+      showMore:true,
+      moreLeft:e.detail.x,
+      moreTop: getApp<IAppOption>().globalData.systemInfo.screenHeight-e.detail.y
+    })
+    
+
+  },
+  hideMoreAction(){
+    console.log("33333333");
+    
+    this.setData({
+      showMore:false,
+    })
+   
+  }
   
 })

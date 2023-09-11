@@ -5,7 +5,8 @@ interface IAppOption {
     userInfo?: WechatMiniprogram.UserInfo,
     statusHeight?:number,
     bottomHeight?:number,
-    shopCar?:any[]
+    shopCar?:any[],
+    systemInfo?:any
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
 }

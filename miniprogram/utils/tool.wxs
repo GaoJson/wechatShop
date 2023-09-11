@@ -2,11 +2,31 @@
 function toFloat(str) {
   return parseFloat(str)
 }
-function toFloat(str) {
-  
-  return parseFloat(str)
+
+function getState(index) {
+  var msg = ''
+  switch (index) {
+    case 0:
+      msg = "待支付"
+      break;
+    case 1:
+      msg = "待发货"
+      break;
+    case 2:
+      msg = "待收货"
+      break;
+    case 3:
+      msg = "待评价"
+      break;
+    case 4:
+      msg = "已完成"
+      break;
+  }
+return msg
 }
 
+
 module.exports = {
-  toFloat:toFloat
+  toFloat: toFloat,
+  getState:getState
 }

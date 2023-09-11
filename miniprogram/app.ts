@@ -7,6 +7,7 @@ App<IAppOption>({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     const systemInfo = wx.getSystemInfoSync();
+    this.globalData.systemInfo = systemInfo;
     this.globalData.statusHeight = systemInfo.statusBarHeight
     this.globalData.bottomHeight = (systemInfo.screenHeight - systemInfo.safeArea.bottom);
     this.globalData.shopCar = [];

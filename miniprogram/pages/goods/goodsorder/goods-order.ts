@@ -15,6 +15,7 @@ Page({
     address:<AddressModel>{},
     priceInfo:[],
     allPrice:'0.00',
+    allCount:0,
     payShow:false,
     orderId:0,
   },
@@ -77,7 +78,9 @@ Page({
   calculatePrice(){
     var param = []
     var allPrice = 0.00
+    var allCount = 0
     this.data.goodsList.forEach(element => {
+      allCount += element.count
      allPrice += element.count * Number.parseFloat(element.goodsPrice)
     });
     param.push({
@@ -97,6 +100,7 @@ Page({
       value:"0.00"
     })
     this.setData({
+      allCount:allCount,
       allPrice:allPrice.toFixed(2),
       priceInfo:param as[]
     })
@@ -116,7 +120,8 @@ Page({
       goodList:this.data.goodsList,
       price:this.data.allPrice,
       id:0,
-      state:0
+      state:0,
+      count:this.data.allCount
     }
     this.deleteGoods()
     addOrder(order).then((res)=>{
