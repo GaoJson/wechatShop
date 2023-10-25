@@ -3,7 +3,7 @@
 <navbar title="我的订单" />
 <view style="top: {{statusHeight}}px;" class="menu-list">
   <view wx:for="{{menuList}}" wx:key="index" class="item">
-    <view bind:tap="menuSelectAction" data-index="{{index}}" class="title {{index==menuSelect?'active':''}}">
+    <view catch:tap="menuSelectAction" data-index="{{index}}" class="title {{index==menuSelect?'active':''}}">
       {{item}}
       <view class="{{index==menuSelect?'line':''}}"></view>
     </view>
@@ -11,11 +11,11 @@
 </view>
 
 <view style="padding-top: {{statusHeight+40}}px;padding-bottom: {{bottomHeight}}px;" class="container">
-  <scroll-view scroll-y>
-    <view class="order-list" wx:for="{{orderList}}" wx:key="index">
+  <scroll-view scroll-y >
+    <view bind:tap="detailAction" data-index="{{item.id}}" class="order-list" wx:for="{{orderList}}" wx:key="index">
       <view class="order-top">
         <view>自营</view>
-        <view class="state">{{tools.getState(item.state)}}</view>
+        <view class="state">{{tools.getState(item)}}</view>
       </view>
 
       <view class="order-goods">
@@ -38,25 +38,27 @@
             ¥{{item.price}}
           </view>
           <view style="color: gray;">
-            共1件
+            共{{item.count}}件
           </view>
         </view>
       </view>
-
       <view style="display:flex;justify-content: space-between">
-        <view bind:tap="moreAction" style="font-size: 13px;color: #666666;margin-left: 8px;line-height: 25px;">
+        <view catch:tap="moreAction" style="font-size: 13px;color: #666666;margin-left: 8px;line-height: 25px;">
           更多
         </view>
         <view style="flex-wrap: wrap;" class="operate-menu">
-          <view wx:if="{{item.state==0}}" class="operate-item red">去支付</view>
-          <view class="operate-item gray">再次购买</view>
-          <view wx:if="{{item.state==1}}" class="operate-item gray">催发货</view>
-          <view wx:if="{{item.state==2}}" class="operate-item gray">查看物流</view>
-          <view wx:if="{{item.state==3}}" class="operate-item gray">删除订单</view>
-          <view wx:if="{{item.state==3}}" class="operate-item gray">评价</view>
+          <view catch:tap="paymentAction" data-index="{{index}}" wx:if="{{item.state==0}}" class="operate-item red">去支付</view>
+          <view catch:tap="addShopcar" data-index="{{index}}" class="operate-item gray">再次购买</view>
+          <view catch:tap="deliveryAction" data-index="{{index}}" wx:if="{{item.state==1}}" class="operate-item gray"> 发货 </view>
+          <view catch:tap="ensureOrder" data-index="{{index}}" wx:if="{{item.state==2}}" class="operate-item gray">确认收货</view>
+          <view catch:tap="expressAction" data-index="{{index}}" wx:if="{{item.state==2}}" class="operate-item gray">查看物流</view>
+          <view catch:tap="deleteOrder" data-index="{{index}}" wx:if="{{item.state==3}}" class="operate-item gray">删除订单</view>
+          <view catch:tap="commentAction" data-index="{{index}}" wx:if="{{item.state==3&&!item.comment}}" class="operate-item gray">评价</view>
+          <view data-index="{{index}}" wx:if="{{item.state==3&&item.comment}}" class="operate-item gray">查看评价</view>
         </view>
       </view>
     </view>
+    <view class="no-datas" wx:if="{{orderList.length==0}}" >暂无数据</view>
   </scroll-view>
 
 </view>
@@ -74,3 +76,5 @@
     </view>
   </view>
 </view>
+
+<payment price="{{orderPrice}}" bind:ensurePwd="ensurePassword" bind:closeModel="closePayment" payShow="{{payShow}}"/>

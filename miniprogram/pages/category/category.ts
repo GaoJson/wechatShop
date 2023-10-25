@@ -1,6 +1,6 @@
 // pages/category/category.ts
 import  API_HOME  from '../../api/homeApi';
-import {addShopCar} from '../../utils/util'
+import {addShopCar, showShopcarCount} from '../../utils/util'
 const app = getApp<IAppOption>();
 
 Page({
@@ -33,6 +33,7 @@ Page({
   onLoad() {
     this.loadData()
   },
+  
 
   loadData() {
     API_HOME.getHomeData().then((res)=>{
@@ -100,7 +101,7 @@ Page({
     })
   },
   onShow(){
-    console.log("1111");
+    showShopcarCount()
     
   },
 

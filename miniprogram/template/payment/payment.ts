@@ -8,6 +8,10 @@ Component({
       type:Boolean,
       value:false
     },
+    price:{
+      type:String,
+      value:''
+    }
   },
 
   data:{

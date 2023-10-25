@@ -1,5 +1,6 @@
+import { calcDateNum } from "../../../miniprogram_npm/@vant/weapp/calendar/utils";
 import { AddressModel, GoodsModel } from "../../../utils/models";
-import { addOrder } from "../../../utils/util";
+import { addOrder, formatTime } from "../../../utils/util";
 
 
 // pages/goods/goodsorder/goods-order.ts
@@ -23,7 +24,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad() { 
     const that = this;
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('addressList', function(data) {
@@ -115,14 +116,17 @@ Page({
       })
       return
     }
+  
     var order = {
       address:this.data.address,
       goodList:this.data.goodsList,
       price:this.data.allPrice,
       id:0,
       state:0,
-      count:this.data.allCount
+      count:this.data.allCount,
+      createTime:formatTime(new Date())
     }
+
     this.deleteGoods()
     addOrder(order).then((res)=>{
       this.data.orderId = res;
@@ -136,23 +140,20 @@ Page({
     wx.getStorage({
       key:"shopCar",
       success:(res)=>{
-          var list:GoodsModel[] = JSON.parse(res.data) 
-          var tempData:GoodsModel[] = JSON.parse(res.data) 
+       
+          var list:GoodsModel[] = res.data
+          var tempData:GoodsModel[] = []
           var selectData = this.data.goodsList
           let mySet = new Set();
           selectData.forEach(element => {
             mySet.add(element.id)
-          });
-          console.log(list);
-          
+          }); 
           list.forEach(element => {
-            if(mySet.has(element.id)){
-                tempData.splice(tempData.indexOf(element),1)
+            if(!mySet.has(element.id)){
+                tempData.push(element)
             }
           });
-          console.log(tempData);
-          getApp<IAppOption>().globalData.shopCar = tempData
-           wx.setStorageSync("shopCar",JSON.stringify(tempData))
+           wx.setStorageSync("shopCar",tempData)
       }
     })
 
@@ -184,6 +185,7 @@ Page({
       const element = orderList[index];
       if(element.id == this.data.orderId){
         element.state = Math.floor(Math.random()*3)+1;
+        element.payTime=formatTime(new Date())
       }
     }
     wx.setStorageSync("order",orderList)

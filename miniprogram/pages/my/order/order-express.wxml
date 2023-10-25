@@ -1,0 +1,15 @@
+<!--pages/my/order/order-express.wxml-->
+<navbar title="物流信息" />
+
+
+<scroll-view style="padding-top: {{statusHeight+10}}px;background-color: #f5f5f5;">
+  <view style="margin-bottom: 10px;margin-left: 10px;">
+  申通快递：777154659346275
+  </view>
+  <van-steps steps="{{ steps }}"  direction="vertical"
+   active="{{ active }}" />
+
+</scroll-view>
+
+
+

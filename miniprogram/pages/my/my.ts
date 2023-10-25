@@ -117,8 +117,10 @@ Page({
     wx.navigateTo({ url: '/pages/my/collect/collect-page' })
   },
 
-  orderAction() {
-    wx.navigateTo({ url: '/pages/my/order/order-page' })
+  orderAction(e:any) {
+    console.log(e);
+    var index = e.currentTarget.dataset.index
+    wx.navigateTo({ url: '/pages/my/order/order-page?type='+index,})
   },
 
 })

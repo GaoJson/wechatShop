@@ -1,0 +1,96 @@
+<!--pages/my/order/order-detail.wxml-->
+<wxs src="../../../utils/tool.wxs" module="tools"></wxs>
+<navbar title="订单详情" />
+
+<view style="padding-top: {{statusHeight}}px;padding-bottom: {{bottomHeight}}px;" class="container">
+  <scroll-view>
+    <view class="goods">
+      <view class="goods-item" wx:for="{{order.goodList}}" wx:key="index">
+        <image src="{{item.goodsImg}}"> </image>
+        <view class="goods-detail">
+          <view class="goods-name">
+            {{item.goodsName}}
+          </view>
+          <view class="goods-spec">
+            {{item.spec}}
+          </view>
+          <view class="goods-price-number">
+            <view class="goods-price">
+              ¥ {{tools.toFloat(item.goodsPrice)}}
+            </view>
+            <view class="goods-num">
+              x{{item.count}}
+            </view>
+          </view>
+          <view>
+            <view class="tips">
+              七天无理由退货
+            </view>
+            <view class="tips">
+              自营
+            </view>
+          </view>
+          <view style="display: flex;margin-top: 5px;flex-direction: row-reverse;">
+            <view class="operate-item red">加入购物车</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="detail">
+      <view class="detail-item">
+        <view class="title">商品总价</view>
+        <view style="font-weight: 600;" class="title">¥{{order.price}}</view>
+      </view>
+      <view class="detail-item">
+        <view class="title">运费</view>
+        <view style="font-weight: 600;" class="title">¥0.0</view>
+      </view>
+      <view class="detail-item">
+        <view class="title">支付优惠</view>
+        <view style="font-weight: 600;" class="title">¥0.0</view>
+      </view>
+      <view class="detail-item">
+        <view class="title">实付款</view>
+        <view style="font-weight: 500;color: rgb(253, 134, 22);font-size: 20px;" class="title">¥{{order.price}}</view>
+      </view>
+      <view class="detail-item">
+        <view style="width: 250rpx;" class="title">收货信息</view>
+        <view style="color: gray;text-align: right;" class="title">
+          {{order.address.userName}},{{order.address.phone}},
+          {{order.address.area}}{{order.address.areaDetail}}
+        </view>
+      </view>
+      <view class="detail-item">
+      <view class="title">创建时间</view>
+      <view class="value">{{order.createTime}}</view>
+      </view>
+      <view class="detail-item">
+      <view class="title">支付时间</view>
+      <view class="value">{{order.payTime}}</view>
+      </view>
+      <view class="detail-item">
+      <view class="title">发货时间</view>
+      <view class="value">{{order.deliveryTime}}</view>
+      </view>
+      <view class="detail-item">
+      <view class="title">成交时间</view>
+      <view class="value">{{order.completeTime}}</view>
+      </view>
+
+
+    </view>
+    <view style="height: 100px;">
+  
+    </view>
+    
+  </scroll-view>
+
+<view style="position: fixed;bottom: 0;width: 100%;background-color: white;height: {{bottomHeight+40}}px;">
+<view style="height: 40px;display: flex;align-items: center;flex-direction: row-reverse;">
+  <view class="operate-item red">加入购物车</view>
+</view>
+
+
+</view>
+
+</view>

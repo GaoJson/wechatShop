@@ -1,7 +1,7 @@
 // pages/basket/basket.ts
 
 import { GoodsModel } from "../../utils/models";
-import {calculateShopCar} from '../../utils/util'
+import {calculateShopCar, formatTime, showShopcarCount} from '../../utils/util'
 const app = getApp<IAppOption>();
 
 Page({
@@ -23,37 +23,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-   
+  
+    
     
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-    var array:[] = app.globalData.shopCar as []
-    var allCount = 0;
-    for (let index = 0; index < array.length; index++) {
-      const element:GoodsModel = array[index];
-      element.selectFlag = false;
-      allCount += element.count;
-    }
-    wx.setStorageSync("shopCarCount", allCount);
-    wx.setTabBarBadge({
-      index: 2,
-      text: "" + allCount,
-    })
-    this.setData({
-      editFlag:false,
-      goodsList:array,
-      selectAllFlag:false
+    showShopcarCount()
+    wx.getStorage({
+      key:"shopCar",
+      success:(res)=>{
+        console.log(res);
+        this.setData({
+          editFlag:false,
+          goodsList:res.data,
+        })
+      }
     })
     this.calculatePrice()
   },

@@ -1,3 +1,5 @@
+import { GoodsModel } from "./models"
+
 export const formatTime = (date: Date) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -7,7 +9,7 @@ export const formatTime = (date: Date) => {
   const second = date.getSeconds()
 
   return (
-    [year, month, day].map(formatNumber).join('/') +
+    [year, month, day].map(formatNumber).join('-') +
     ' ' +
     [hour, minute, second].map(formatNumber).join(':')
   )
@@ -25,10 +27,14 @@ export const navbarHeight = ()=>{
 }
 
 export const addShopCar = (data: any) => {
-  var goodsList: any = app.globalData.shopCar;
+  var list = wx.getStorageSync("shopCar")
+  if(!list){
+   list = []
+  }
+  var goodsList:any[] = list
   var exitFlag = false;
   var allCount = 0;
-  for (let index = 0; index < (goodsList ?? []).length; index++) {
+  for (let index = 0; index < goodsList.length; index++) {
     var tempData = goodsList[index];
     if (tempData.id == data.id) {
       var count = Number.parseInt(tempData.count);
@@ -39,20 +45,22 @@ export const addShopCar = (data: any) => {
     allCount += Number.parseInt(tempData.count);
   }
   if (!exitFlag) {
-    app.globalData.shopCar?.push({
+    var goodsData:GoodsModel = {
       "goodsName": data.goodsName,
       "goodsImg": data.goodsImg,
       "goodsPrice": data.goodsPrice,
       "id": data.id,
       "spec": data.spec,
-      "count": 1
-    });
+      "count": 1,
+      selectFlag:true
+    }
     allCount += 1;
+    console.log(goodsList);
+    
+    goodsList.push(goodsData)
   }
-  wx.setStorageSync("shopCar", JSON.stringify(app.globalData.shopCar));
+  wx.setStorageSync("shopCar",goodsList);
   wx.setStorageSync("shopCarCount", allCount);
-  console.log(allCount);
-
   wx.setTabBarBadge({
     index: 2,
     text: "" + allCount,
@@ -64,9 +72,24 @@ export const calculateShopCar = (data: []) => {
     var tempData: any = data[index];
     allCount += Number.parseInt(tempData.count);
   }
-  app.globalData.shopCar = data;
-  wx.setStorageSync("shopCar", JSON.stringify(data));
+  wx.setStorageSync("shopCar",data);
   wx.setStorageSync("shopCarCount", allCount);
+  wx.setTabBarBadge({
+    index: 2,
+    text: "" + allCount,
+  })
+}
+
+export const showShopcarCount=()=>{
+  var list = wx.getStorageSync("shopCar")
+  if(!list){
+   list = []
+  }
+  var allCount = 0
+  for (let index = 0; index < list.length; index++) {
+    var tempData = list[index];
+    allCount += Number.parseInt(tempData.count);
+  }
   wx.setTabBarBadge({
     index: 2,
     text: "" + allCount,
@@ -144,6 +167,11 @@ export const addOrder=(data:any):Promise<any>=>{
         wx.setStorageSync("order",list)
         resolve(data.id)
       },
+      fail:()=>{
+        var list:any[] = []
+        list.push(data)
+        wx.setStorageSync("order",list)
+      }
     })
   })
   

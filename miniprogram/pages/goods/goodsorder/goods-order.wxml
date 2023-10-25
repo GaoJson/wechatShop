@@ -53,9 +53,7 @@
               自营
             </view>
           </view>
-
         </view>
-
       </view>
     </view>
 
@@ -93,4 +91,4 @@
   </view>
 </view>
 
-<payment bind:ensurePwd="ensurePassword" bind:closeModel="closePayment" payShow="{{payShow}}"></payment>
+<payment price="{{allPrice}}" bind:ensurePwd="ensurePassword" bind:closeModel="closePayment" payShow="{{payShow}}"/>

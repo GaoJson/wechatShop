@@ -1,0 +1,17 @@
+<!--pages/my/order/order-comment.wxml-->
+<navbar title="评论" />
+
+<view class="container" style="padding-top: {{statusHeight}}px;">
+  
+  <view style="background-color: white;margin-top: 10px;padding: 8px;">
+    <view style="display: flex;align-items: center;">
+      <view style="margin-right: 8px;">商品评价  </view>
+      <van-rate size="30px" value="{{ star }}" bind:change="starChange"/>
+    </view>
+    <textarea value="{{content}}" bindinput="contentChange" placeholder="请输入商品评价" style="border: 1px solid #eeeeee;height: 100px;border-radius: 10px;padding: 10px" maxlength='-1'></textarea>
+    <button bind:tap="submitAction" type="primary" style="margin-top: 20px;margin-bottom: 20px;">提交评论</button>
+  
+  </view>
+
+
+</view>

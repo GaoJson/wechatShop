@@ -18,7 +18,7 @@
 </view>
 
 <view class="order-view">
-  <view style="width: 100%;">
+  <view bind:tap="orderAction" data-index="{{-1}}" style="width: 100%;">
     <view style="display: inline-block;padding-left: 8px;">
       我的订单
     </view>
@@ -29,7 +29,7 @@
   <view style="height: 1px;background-color: #f0f0f0;width: 100%;margin-top: 5px;margin-bottom: 5px;"/>
   <van-row>
     <van-col span="6" wx:for="{{menuList}}" wx:key="index">
-      <view bind:tap="orderAction" style="text-align: center;position: relative;">
+      <view bind:tap="orderAction" data-index="{{index}}" style="text-align: center;position: relative;">
         <view  wx:if="{{item.number>0}}" class="dot">{{item.number}}</view>
         <image style="width: 40px;height: 40px;" src="../../images/my/{{item.icon}}.png"></image>
         <view style="font-size: 13px;">{{item.name}}</view>

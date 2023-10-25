@@ -13,7 +13,7 @@
     商品
     </view>
     <view class="price">
-      <text>¥</text>12.12
+      <text>¥</text>{{price}}
     </view>
   </view>
 

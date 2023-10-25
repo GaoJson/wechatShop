@@ -3,8 +3,9 @@ function toFloat(str) {
   return parseFloat(str)
 }
 
-function getState(index) {
+function getState(data) {
   var msg = ''
+  var index = data.state
   switch (index) {
     case 0:
       msg = "待支付"
@@ -16,10 +17,11 @@ function getState(index) {
       msg = "待收货"
       break;
     case 3:
-      msg = "待评价"
-      break;
-    case 4:
-      msg = "已完成"
+      if(data.comment){
+        msg = "已完成"
+      } else{
+        msg = "待评价"
+      }
       break;
   }
 return msg

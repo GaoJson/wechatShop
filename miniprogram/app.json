@@ -10,7 +10,10 @@
     "pages/my/address/address-add",
     "pages/my/collect/collect-page",
     "pages/goods/goodsorder/goods-order",
-    "pages/my/order/order-page"
+    "pages/my/order/order-page",
+    "pages/my/order/order-detail",
+    "pages/my/order/order-express",
+    "pages/my/order/order-comment"
   ],
   "tabBar": {
     "selectedColor": "#3a86b9",
@@ -49,4 +52,5 @@
     "navigationStyle": "custom"
   },
   "sitemapLocation": "sitemap.json"
+  
 }

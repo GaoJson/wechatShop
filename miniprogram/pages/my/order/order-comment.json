@@ -1,6 +1,6 @@
 {
   "usingComponents": {
     "navbar": "../../../template/navbar/navbar",
-    "payment": "../../../template/payment/payment"
+    "van-rate": "@vant/weapp/rate"
   }
 }
